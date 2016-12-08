@@ -61,7 +61,7 @@ push-debug-ecr:
     - internal/docker-push:
         aws-access-key: $AWS_ACCESS_KEY_ID
         aws-secret-key: $AWS_SECRET_ACCESS_KEY
-        aws-region: us-east-2
+        aws-region: $AWS_REGION
         aws-registry-id: $AWS_REGISTRY_ID
         repository: workflows-demo
         ports: 8000
@@ -79,10 +79,10 @@ push-release-ecr:
           cp -Rp $WERCKER_SOURCE_DIR/* /usr/share/nginx/html
 
     - internal/docker-push:
-
+        disable-sync: true
         aws-access-key: $AWS_ACCESS_KEY_ID
         aws-secret-key: $AWS_SECRET_ACCESS_KEY
-        aws-region: us-east-2
+        aws-region: $AWS_REGION
         aws-registry-id: $AWS_REGISTRY_ID
         repository: workflows-demo
         tag: $WERCKER_GIT_BRANCH
@@ -97,6 +97,7 @@ deploy-to-ecs:
     - 1science/aws-ecs:
         key: $AWS_ACCESS_KEY_ID
         secret: $AWS_SECRET_ACCESS_KEY
+        region: $AWS_REGION
         cluster-name: workflows-demo
         service-name: workflows-demo-service
         task-definition-name: workflows-demo
