@@ -79,7 +79,7 @@ push-release-ecr:
           cp -Rp $WERCKER_SOURCE_DIR/* /usr/share/nginx/html
 
     - internal/docker-push:
-        disable-sync: true
+
         aws-access-key: $AWS_ACCESS_KEY_ID
         aws-secret-key: $AWS_SECRET_ACCESS_KEY
         aws-region: us-east-2
