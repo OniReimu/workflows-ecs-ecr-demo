@@ -20,5 +20,3 @@ You can see a visual representation of the Workflows below.
 
 ![image](amazon-workflow.png)
 
-hello world
-111
