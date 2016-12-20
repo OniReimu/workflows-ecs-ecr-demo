@@ -1,0 +1,17 @@
+version: '2'
+services:
+    webtest:
+        labels:
+            io.rancher.scheduler.global: 'true'
+            io.rancher.scheduler.affinity:host_label: reimu=saber
+        tty: true
+        stdin_open: true
+        container_name: practera-web
+        image: 854586034747.dkr.ecr.us-west-2.amazonaws.com/workflows-demo/push-release-ecr:latest
+        # image: practera/develop  # use images to prevent docker container duplication
+        #build: docker/develop/develop
+        dns:
+            - 8.8.8.8
+            - 8.8.4.4
+        ports:
+            - 8000:80/tcp
