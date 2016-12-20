@@ -43,8 +43,6 @@ tests:
 
 release-build:
   steps:
-    - install-packages:
-        packages: curl wget unzip
     - script:
         name: npm rebuild
         code: |
@@ -109,6 +107,8 @@ deploy-to-ecs:
 deploy-to-rancher:
   box: python:2.7-slim
   steps:
+    - install-packages:
+        packages: curl wget unzip
     - script:
       name: template
       code: ./template.sh
