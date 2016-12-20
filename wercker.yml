@@ -103,3 +103,22 @@ deploy-to-ecs:
         service-name: workflows-demo-service
         task-definition-name: workflows-demo
         task-definition-file: $WERCKER_SOURCE_DIR/workflows-demo-task-definition.json
+        
+deploy-to-rancher:
+  box: python:2.7-slim
+  steps:
+    - script:
+      name: template
+      code: ./template.sh
+    - nhumrich/deploy-to-rancher:
+        access_key: $RANCHER_ACCESS_KEY
+        secret_key: $RANCHER_SECRET_KEY
+        rancher_url: $RANCHER_URL
+        https: false # should https protocol be used?
+        tag: latest  # docker tag for the `image:` section in docker-compose
+        stack_name: test_stack  # Rancher stack name
+        service_name: test_service  # Name of service in rancher
+        docker_org: reimu  # name of organaztion
+        docker_image: push-release-ecr
+        use_tag: false
+        inplace: false
